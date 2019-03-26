@@ -1,0 +1,15 @@
+{
+  "defaultSeverity": "error",
+
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+
+  "rules": {
+    "no-console": true,
+    "object-literal-sort-keys": false,
+    "no-shadowed-variable": true
+  },
+
+  "linterOptions": {
+    "exclude": ["node_modules/**", "dist/**"]
+  }
+}

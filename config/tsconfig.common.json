@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "allowSyntheticDefaultImports": true,
+    "allowJs": false,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "typeRoots": ["../../node_modules/@types", "../@types"]
+  }
+}
