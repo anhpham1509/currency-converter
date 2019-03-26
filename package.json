@@ -1,0 +1,18 @@
+{
+  "name": "react-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "echo 'Starting'",
+    "build": "echo 'Building'",
+    "test": "echo 'Testing'"
+  },
+  "dependencies": {
+    "react": "16.8.5",
+    "react-dom": "16.8.5"
+  },
+  "devDependencies": {
+    "@types/react": "16.8.8",
+    "@types/react-dom": "16.8.3"
+  }
+}
