@@ -5,7 +5,8 @@
     "baseUrl": "./",
     "target": "es5",
     "module": "commonjs",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "typeRoots": ["../../node_modules/@types", "@types"]
   },
 
   "include": ["**/*.ts"]

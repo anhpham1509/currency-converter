@@ -10,8 +10,6 @@
     "allowJs": false,
 
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-
-    "typeRoots": ["../../node_modules/@types", "../@types"]
+    "emitDecoratorMetadata": true
   }
 }
