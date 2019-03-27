@@ -1,0 +1,24 @@
+{
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.{ts,tsx}",
+    "!<rootDir>/src/views/**/**/index.ts",
+    "!<rootDir>/src/index.tsx"
+  ],
+  "coverageDirectory": "<rootDir>/coverage/",
+
+  "moduleDirectories": ["<rootDir>/node_modules"],
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "node", "json"],
+  "moduleNameMapper": {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/jest/fileMock.js",
+    "\\.(scss|css)$": "identity-obj-proxy"
+  },
+
+  "preset": "ts-jest/presets/js-with-babel",
+
+  "rootDir": "../../",
+  "roots": ["<rootDir>", "<rootDir>/src"],
+
+  "setupFiles": ["<rootDir>/config/jest/jestSetup.ts"],
+
+  "testMatch": ["<rootDir>/**/*.test.{ts,tsx}"]
+}
