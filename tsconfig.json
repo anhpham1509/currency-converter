@@ -1,7 +1,6 @@
 {
   "extends": "./config/tsconfig.common.json",
   "compilerOptions": {
-    "baseUrl": "./",
     "target": "es6",
     "module": "esnext",
     "moduleResolution": "node",
