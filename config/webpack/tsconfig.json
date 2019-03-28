@@ -1,11 +1,12 @@
 {
   "extends": "../tsconfig.common.json",
   "compilerOptions": {
-    "paths": {"*": ["types/*"]},
-    "target": "es5",
+    "baseUrl": "../../",
+    "paths": {"*": ["config/webpack/@types/*"]},
     "module": "commonjs",
-    "typeRoots": ["../../node_modules/@types", "@types"]
+    "target": "es5",
+    "typeRoots": ["node_modules/@types", "@types", "config/webpack/@types"]
   },
 
-  "include": ["**/*.ts"]
+  "include": ["config/**/*.ts", "@types"]
 }
