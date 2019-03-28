@@ -30,7 +30,7 @@ const styleRule: webpack.RuleSetRule = {
 };
 
 const assetRule: webpack.RuleSetRule = {
-  test: "/.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/",
+  test: /\.(jpg|png|gif|eot|svg|ttf|woff|woff2)$/,
   loader: "file-loader"
 };
 

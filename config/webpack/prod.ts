@@ -55,7 +55,7 @@ const eotRule = {
   use: {
     loader: "file-loader",
     options: {
-      name: "fonts/[hash].[ext]"
+      name: "assets/fonts/[hash].[ext]"
     }
   }
 };
@@ -65,7 +65,7 @@ const woffRule = {
   use: {
     loader: "file-loader",
     options: {
-      name: "fonts/[hash].[ext]"
+      name: "assets/fonts/[hash].[ext]"
     }
   }
 };
@@ -77,7 +77,7 @@ const ttfRule = {
     options: {
       limit: 10000,
       mimetype: "application/octet-stream",
-      name: "fonts/[hash].[ext]"
+      name: "assets/fonts/[hash].[ext]"
     }
   }
 };
@@ -89,7 +89,7 @@ const svgRule = {
     options: {
       limit: 10000,
       mimetype: "image/svg+xml",
-      name: "fonts/[hash].[ext]"
+      name: "assets/images/[hash].[ext]"
     }
   }
 };
@@ -100,7 +100,7 @@ const imgRule = {
     loader: "url-loader",
     options: {
       limit: 10000,
-      name: "fonts/[hash].[ext]"
+      name: "assets/images/[hash].[ext]"
     }
   }
 };
