@@ -1,3 +1,4 @@
+import dotenv from "dotenv-webpack";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import webpack from "webpack";
 import {root} from "./helpers";
@@ -35,7 +36,9 @@ const progressPlugin = new webpack.ProgressPlugin();
 
 const tsCheckerPlugin = new ForkTsCheckerWebpackPlugin();
 
-const plugins: webpack.Plugin[] = [progressPlugin, tsCheckerPlugin];
+const dotenvPlugin = new dotenv({systemvars: true});
+
+const plugins: webpack.Plugin[] = [progressPlugin, tsCheckerPlugin, dotenvPlugin];
 
 const baseConfig: webpack.Configuration = {
   context: root(),

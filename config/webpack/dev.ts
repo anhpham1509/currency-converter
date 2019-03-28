@@ -44,17 +44,10 @@ const htmlPlugin: webpack.Plugin = new HtmlWebpackPlugin({
   inject: "body"
 });
 
-const definePlugin = new webpack.DefinePlugin({
-  "process.env": {
-    BROWSER: JSON.stringify(true),
-    NODE_ENV: JSON.stringify("development")
-  }
-});
-
 // Hot Module Replacement plugin for hot mode in dev server
 const hmrPlugin: webpack.Plugin = new webpack.HotModuleReplacementPlugin();
 
-const plugins: webpack.Plugin[] = [htmlPlugin, definePlugin, hmrPlugin];
+const plugins: webpack.Plugin[] = [htmlPlugin, hmrPlugin];
 
 const devServer: webpackDevServer.Configuration = {
   host: "0.0.0.0",

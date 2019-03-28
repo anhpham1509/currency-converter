@@ -146,20 +146,12 @@ const htmlPlugin: webpack.Plugin = new HtmlWebpackPlugin({
 // Exclude unnecessary locales in moment.js
 const contextReplacementPlugin = new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/);
 
-const definePlugin: webpack.Plugin = new webpack.DefinePlugin({
-  "process.env": {
-    BROWSER: JSON.stringify(true),
-    NODE_ENV: JSON.stringify("production")
-  }
-});
-
 const plugins: webpack.Plugin[] = [
   cleanPlugin,
   miniCssExtractPlugin,
   optimizeCssPlugin,
   contextReplacementPlugin,
-  htmlPlugin,
-  definePlugin
+  htmlPlugin
 ];
 
 const optimization: webpack.Options.Optimization = {
