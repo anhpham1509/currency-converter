@@ -17,15 +17,14 @@ export default class AmountInput extends React.Component<IProps, IState> {
 
     return (
       <TextField
-        // error={true}
+        error={!value}
         id="amount-input"
         label="Amount"
         value={value}
         className="amount-input"
         margin="normal"
-        // variant="outlined"
         type="number"
-        helperText="Please select your currency"
+        helperText={!value && "Please input the conversion amount"}
         onChange={this.onInputChange}
       />
     );

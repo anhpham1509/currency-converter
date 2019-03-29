@@ -27,15 +27,11 @@ export default class CurrencyInput extends React.Component<IProps, IState> {
 
     return (
       <Select
-        // classes={classes}
-        // styles={selectStyles}
         options={currencies}
-        // components={components}
         value={!value ? null : this.getSelectedOption(currencies, value)}
         onChange={onChange}
         placeholder={placeholder}
         isClearable={true}
-        // helperText="Please select your currency"
       />
     );
   }
