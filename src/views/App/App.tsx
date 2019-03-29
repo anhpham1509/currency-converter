@@ -61,14 +61,6 @@ class App extends React.Component<IProps, IState> {
       });
   }
 
-  public componentDidUpdate() {
-    const {showError} = this.state;
-
-    if (!this.isValid() && !showError) {
-      this.setState({showError: true});
-    }
-  }
-
   public render() {
     return (
       <Grid className="app" container={true} xs={10} sm={8} direction="column" justify="center" alignItems="center">
@@ -84,7 +76,7 @@ class App extends React.Component<IProps, IState> {
   }
 
   private renderForm = () => {
-    const {rates, from, to, amount} = this.state;
+    const {rates, from, to, amount, showError} = this.state;
     const currencies = Object.keys(rates).map((c) => ({value: c, label: c}));
 
     return (
@@ -107,6 +99,7 @@ class App extends React.Component<IProps, IState> {
               value={from}
               currencies={currencies.filter((c) => c.value !== to)}
               placeholder={"e.g. EUR"}
+              showError={showError}
               onChange={this.onSelectInputChange("from")}
             />
           </Grid>
@@ -122,6 +115,7 @@ class App extends React.Component<IProps, IState> {
               value={to}
               currencies={currencies.filter((c) => c.value !== from)}
               placeholder={"e.g. USD"}
+              showError={showError}
               onChange={this.onSelectInputChange("to")}
             />
           </Grid>
@@ -129,7 +123,7 @@ class App extends React.Component<IProps, IState> {
 
         <Grid className="row" container={true} direction="row" justify="center" alignItems="center">
           <Grid item={true} xs={6} md={9}>
-            <AmountInput value={amount} onChange={this.onAmountChange} />
+            <AmountInput value={amount} onChange={this.onAmountChange} showError={showError} />
           </Grid>
 
           <Grid item={true} xs={6} md={3}>
@@ -190,31 +184,35 @@ class App extends React.Component<IProps, IState> {
   };
 
   private convert = () => {
-    if (this.isValid()) {
-      const {rates, from, to, amount} = this.state;
-      const ltrRate = rates[to] / rates[from];
-
-      this.setState({
-        result: {
-          srcAmount: amount,
-          srcCurrency: from,
-
-          dstAmount: ltrRate * amount,
-          dstCurrency: to,
-
-          ltrRate,
-          rtlRate: 1 / ltrRate
-        }
-      });
+    if (!this.isValid()) {
+      return this.setState({showError: true});
     }
+
+    const {rates, from, to, amount} = this.state;
+    const ltrRate = rates[to] / rates[from];
+
+    this.setState({
+      result: {
+        srcAmount: amount,
+        srcCurrency: from,
+
+        dstAmount: ltrRate * amount,
+        dstCurrency: to,
+
+        ltrRate,
+        rtlRate: 1 / ltrRate
+      }
+    });
   };
 
   private switchCurrency = () => {
-    if (this.isCurrencyValid()) {
-      const {from, to} = this.state;
-
-      this.setState({from: to, to: from});
+    if (!this.isCurrencyValid()) {
+      return this.setState({showError: true});
     }
+
+    const {from, to} = this.state;
+
+    this.setState({from: to, to: from});
   };
 
   private prettyNumber = (value: number): number => {

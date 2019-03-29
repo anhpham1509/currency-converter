@@ -7,24 +7,25 @@ import "./AmountInput.scss";
 interface IProps {
   value: number;
   onChange: (value: number) => void;
+  showError: boolean;
 }
 
 interface IState {}
 
 export default class AmountInput extends React.Component<IProps, IState> {
   public render() {
-    const {value} = this.props;
+    const {value, showError} = this.props;
 
     return (
       <TextField
-        error={!value}
+        error={showError && !value}
         id="amount-input"
         label="Amount"
         value={value}
         className="amount-input"
         margin="normal"
         type="number"
-        helperText={!value && "Please input the conversion amount"}
+        helperText={showError && !value && "Please input the conversion amount"}
         onChange={this.onInputChange}
       />
     );

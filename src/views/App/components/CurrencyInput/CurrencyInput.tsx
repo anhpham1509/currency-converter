@@ -12,6 +12,7 @@ interface IProps {
   placeholder: string;
   value: string;
   onChange: (value: ValueType<ISelectOption>) => void;
+  showError: boolean;
 }
 
 interface IState {}
@@ -25,7 +26,7 @@ export default class CurrencyInput extends React.Component<IProps, IState> {
     };
   }
   public render() {
-    const {currencies, value, placeholder, onChange} = this.props;
+    const {currencies, value, placeholder, onChange, showError} = this.props;
 
     return (
       <React.Fragment>
@@ -37,7 +38,7 @@ export default class CurrencyInput extends React.Component<IProps, IState> {
           placeholder={placeholder}
           isClearable={true}
         />
-        <p className="help-text">{!value && "Please select currency"}</p>
+        <p className="help-text">{showError && !value && "Please select currency"}</p>
       </React.Fragment>
     );
   }
