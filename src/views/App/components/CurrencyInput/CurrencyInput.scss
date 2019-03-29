@@ -1,9 +1,8 @@
 @import "../../../../styles/colors";
 
 .has-error {
-  input {
-    border: 1px !important;
-    border: $burnt-sienna !important;
+  & > div {
+    border-color: $burnt-sienna;
   }
 }
 

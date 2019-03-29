@@ -14,18 +14,18 @@ interface IState {}
 
 export default class AmountInput extends React.Component<IProps, IState> {
   public render() {
-    const {value, showError} = this.props;
+    const {value} = this.props;
 
     return (
       <TextField
-        error={showError && !value}
+        error={this.shouldShowErrors()}
         id="amount-input"
         label="Amount"
         value={value}
         className="amount-input"
         margin="normal"
         type="number"
-        helperText={showError && !value && "Please input the conversion amount"}
+        helperText={this.shouldShowErrors() && "Please input the conversion amount"}
         onChange={this.onInputChange}
       />
     );
@@ -33,5 +33,11 @@ export default class AmountInput extends React.Component<IProps, IState> {
 
   private onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     return this.props.onChange(Number.parseFloat(event.target.value));
+  };
+
+  private shouldShowErrors = () => {
+    const {value, showError} = this.props;
+
+    return showError && !value;
   };
 }
