@@ -1,0 +1,15 @@
+@import "../../../../styles/colors";
+
+.has-error {
+  input {
+    border: 1px !important;
+    border: $burnt-sienna !important;
+  }
+}
+
+p.help-text {
+  text-align: start;
+  font-size: 1.6rem;
+  color: $burnt-sienna;
+  margin-top: 0.5rem;
+}

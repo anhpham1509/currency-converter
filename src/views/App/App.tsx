@@ -101,7 +101,7 @@ class App extends React.Component<IProps, IState> {
           </Grid>
         </Grid>
 
-        <Grid className="row" container={true} direction="row" justify="center" alignItems="center">
+        <Grid className="row" container={true} direction="row" justify="center" alignItems="flex-start">
           <Grid item={true} xs={5}>
             <CurrencyInput
               value={from}
@@ -133,7 +133,7 @@ class App extends React.Component<IProps, IState> {
           </Grid>
 
           <Grid item={true} xs={6} md={3}>
-            <Button variant="contained" color="primary" onClick={this.convert}>
+            <Button className="submit-btn" variant="contained" color="primary" onClick={this.convert}>
               Convert
               <SendIcon>convert</SendIcon>
             </Button>

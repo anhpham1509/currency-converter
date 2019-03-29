@@ -5,6 +5,8 @@ import Select from "react-select";
 import {ValueType} from "react-select/lib/types";
 import {ISelectOption} from "../../../../interfaces/selectOption";
 
+import "./CurrencyInput.scss";
+
 interface IProps {
   currencies: ISelectOption[];
   placeholder: string;
@@ -26,13 +28,17 @@ export default class CurrencyInput extends React.Component<IProps, IState> {
     const {currencies, value, placeholder, onChange} = this.props;
 
     return (
-      <Select
-        options={currencies}
-        value={!value ? null : this.getSelectedOption(currencies, value)}
-        onChange={onChange}
-        placeholder={placeholder}
-        isClearable={true}
-      />
+      <React.Fragment>
+        <Select
+          className={!value ? "has-error" : ""}
+          options={currencies}
+          value={!value ? null : this.getSelectedOption(currencies, value)}
+          onChange={onChange}
+          placeholder={placeholder}
+          isClearable={true}
+        />
+        <p className="help-text">{!value && "Please select currency"}</p>
+      </React.Fragment>
     );
   }
 
