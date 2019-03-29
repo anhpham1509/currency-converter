@@ -3,6 +3,10 @@
 .has-error {
   & > div {
     border-color: $burnt-sienna;
+
+    &:hover {
+      border-color: $burnt-sienna;
+    }
   }
 }
 
