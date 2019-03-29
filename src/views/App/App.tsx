@@ -172,7 +172,7 @@ class App extends React.Component<IProps, IState> {
   private isValid = () => {
     const {amount} = this.state;
 
-    return this.isCurrencyValid() && !!amount;
+    return this.isCurrencyValid() && !!amount && amount > 0;
   };
 
   private onSelectInputChange = (key: string) => (option: ValueType<ISelectOption>) => {
