@@ -44,9 +44,9 @@ class App extends React.Component<IProps, IState> {
       timestamp: new Date(),
       rates: {},
 
-      from: "USD",
-      to: "EUR",
-      amount: 100,
+      from: "",
+      to: "",
+      amount: 0,
 
       showError: false,
       result: undefined
@@ -57,7 +57,6 @@ class App extends React.Component<IProps, IState> {
     fetch("https://api.exchangeratesapi.io/latest")
       .then((res) => res.json())
       .then((body) => {
-        console.log(body);
         this.setState({timestamp: new Date(body.date), rates: Object.assign({[body.base]: 1}, body.rates)});
       });
   }
@@ -71,15 +70,25 @@ class App extends React.Component<IProps, IState> {
   }
 
   public render() {
-    const {rates, result, from, to, amount, timestamp} = this.state;
-    const currencies = Object.keys(rates).map((c) => ({value: c, label: c}));
-
     return (
       <Grid className="app" container={true} xs={10} sm={8} direction="column" justify="center" alignItems="center">
         <Grid container={true} direction="row" justify="center" alignItems="center">
           <h1>Currency Converter</h1>
         </Grid>
 
+        {this.renderForm()}
+
+        {this.renderResult()}
+      </Grid>
+    );
+  }
+
+  private renderForm = () => {
+    const {rates, from, to, amount} = this.state;
+    const currencies = Object.keys(rates).map((c) => ({value: c, label: c}));
+
+    return (
+      <React.Fragment>
         <Grid className="row" container={true} direction="row" justify="center" alignItems="center">
           <Grid item={true} xs={5}>
             <label htmlFor="from">From</label>
@@ -96,7 +105,7 @@ class App extends React.Component<IProps, IState> {
           <Grid item={true} xs={5}>
             <CurrencyInput
               value={from}
-              currencies={currencies}
+              currencies={currencies.filter((c) => c.value !== to)}
               placeholder={"e.g. EUR"}
               onChange={this.onSelectInputChange("from")}
             />
@@ -111,7 +120,7 @@ class App extends React.Component<IProps, IState> {
           <Grid item={true} xs={5}>
             <CurrencyInput
               value={to}
-              currencies={currencies}
+              currencies={currencies.filter((c) => c.value !== from)}
               placeholder={"e.g. USD"}
               onChange={this.onSelectInputChange("to")}
             />
@@ -120,7 +129,6 @@ class App extends React.Component<IProps, IState> {
 
         <Grid className="row" container={true} direction="row" justify="center" alignItems="center">
           <Grid item={true} xs={6} md={9}>
-            {/* <label htmlFor="amount">Amount</label> */}
             <AmountInput value={amount} onChange={this.onAmountChange} />
           </Grid>
 
@@ -131,34 +139,46 @@ class App extends React.Component<IProps, IState> {
             </Button>
           </Grid>
         </Grid>
+      </React.Fragment>
+    );
+  };
 
-        <Grid container={true} direction="row" justify="center" alignItems="center">
-          {result && (
-            <div>
-              <h2>Conversion result</h2>
-              <p>
-                {`${result.srcAmount} ${result.srcCurrency} = ${this.prettyNumber(result.dstAmount)} ${
-                  result.dstCurrency
-                }`}
-                <br />
-                {`1 ${result.srcCurrency} = ${this.prettyNumber(result.ltrRate)} ${result.dstCurrency}`}
-                <br />
-                {`1 ${result.dstCurrency} = ${this.prettyNumber(result.rtlRate)} ${result.srcCurrency}`}
-                <br />
-                <br />
-                {`Last update: ${timestamp.toDateString()}`}
-              </p>
-            </div>
-          )}
-        </Grid>
+  private renderResult = () => {
+    const {result, timestamp} = this.state;
+
+    return (
+      <Grid container={true} direction="row" justify="center" alignItems="center">
+        {result && (
+          <div>
+            <h2>Conversion result</h2>
+            <p>
+              {`${result.srcAmount} ${result.srcCurrency} = ${this.prettyNumber(result.dstAmount)} ${
+                result.dstCurrency
+              }`}
+              <br />
+              {`1 ${result.srcCurrency} = ${this.prettyNumber(result.ltrRate)} ${result.dstCurrency}`}
+              <br />
+              {`1 ${result.dstCurrency} = ${this.prettyNumber(result.rtlRate)} ${result.srcCurrency}`}
+              <br />
+              <br />
+              {`Last update: ${timestamp.toDateString()}`}
+            </p>
+          </div>
+        )}
       </Grid>
     );
-  }
+  };
+
+  private isCurrencyValid = () => {
+    const {from, to} = this.state;
+
+    return !!from && !!to;
+  };
 
   private isValid = () => {
-    const {from, to, amount} = this.state;
+    const {amount} = this.state;
 
-    return !!from && !!to && !!amount;
+    return this.isCurrencyValid() && !!amount;
   };
 
   private onSelectInputChange = (key: string) => (option: ValueType<ISelectOption>) => {
@@ -190,7 +210,7 @@ class App extends React.Component<IProps, IState> {
   };
 
   private switchCurrency = () => {
-    if (this.isValid()) {
+    if (this.isCurrencyValid()) {
       const {from, to} = this.state;
 
       this.setState({from: to, to: from});
