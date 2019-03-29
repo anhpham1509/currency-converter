@@ -38,6 +38,6 @@ export default class AmountInput extends React.Component<IProps, IState> {
   private shouldShowErrors = () => {
     const {value, showError} = this.props;
 
-    return showError && !value;
+    return showError && (!value || value < 0);
   };
 }
