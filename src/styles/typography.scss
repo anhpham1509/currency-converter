@@ -1,8 +1,8 @@
-$font-family: "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+$font-family: "Roboto", sans-serif;
 
 h1 {
   font-family: $font-family;
-  font-size: 3.6rem;
+  font-size: 4.2rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -13,7 +13,7 @@ h1 {
 
 h2 {
   font-family: $font-family;
-  font-size: 2.4rem;
+  font-size: 3rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -24,7 +24,7 @@ h2 {
 
 h3 {
   font-family: $font-family;
-  font-size: 2rem;
+  font-size: 2.6rem;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -35,37 +35,36 @@ h3 {
 
 p {
   font-family: $font-family;
-  font-size: 14px; //px fallback
-  font-size: 1.4rem;
+  font-size: 20px; //px fallback
+  font-size: 2rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  color: $burnt-sienna;
+  color: $shadow-green;
 }
 
 a {
   font-family: $font-family;
-  font-size: 1.4rem;
+  font-size: 2rem;
   font-weight: bold;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
   text-decoration: none;
-  color: $turquoise;
+  color: $shadow-green;
 }
 
 body {
   font-family: $font-family;
-  font-size: 14px; //px fallback
-  font-size: 1.4rem;
+  font-size: 20px; //px fallback
+  font-size: 2rem;
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
   background-color: $athens-gray;
-  color: $burnt-sienna;
 }
