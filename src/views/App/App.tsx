@@ -4,12 +4,13 @@ import {hot} from "react-hot-loader/root";
 import {Button, Grid} from "@material-ui/core";
 import LoopIcon from "@material-ui/icons/Loop";
 import SendIcon from "@material-ui/icons/Send";
-
-import "./App.scss";
 import AmountInput from "./components/AmountInput";
 import CurrencyInput from "./components/CurrencyInput";
+
 import {ValueType} from "react-select/lib/types";
 import {ISelectOption} from "../../interfaces/selectOption";
+
+import "./App.scss";
 
 interface IProps {}
 
@@ -30,7 +31,7 @@ interface IState {
 
   from: string;
   to: string;
-  amount: number;
+  amount: string;
 
   showError: boolean;
   result: IConversionResult | undefined;
@@ -46,7 +47,7 @@ class App extends React.Component<IProps, IState> {
 
       from: "",
       to: "",
-      amount: 0,
+      amount: "0",
 
       showError: false,
       result: undefined
@@ -169,17 +170,21 @@ class App extends React.Component<IProps, IState> {
     return !!from && !!to;
   };
 
+  private getNumber = (str: string) => {
+    return Number.parseFloat(str);
+  };
+
   private isValid = () => {
     const {amount} = this.state;
 
-    return this.isCurrencyValid() && !!amount && amount > 0;
+    return this.isCurrencyValid() && !!amount && this.getNumber(amount) > 0;
   };
 
   private onSelectInputChange = (key: string) => (option: ValueType<ISelectOption>) => {
     this.setState({[key]: !option ? null : (option as ISelectOption).value} as any);
   };
 
-  private onAmountChange = (value: number) => {
+  private onAmountChange = (value: string) => {
     this.setState({amount: value});
   };
 
@@ -192,13 +197,14 @@ class App extends React.Component<IProps, IState> {
 
     const {rates, from, to, amount} = this.state;
     const ltrRate = rates[to] / rates[from];
+    const amountNumber = this.getNumber(amount);
 
     this.setState({
       result: {
-        srcAmount: amount,
+        srcAmount: amountNumber,
         srcCurrency: from,
 
-        dstAmount: ltrRate * amount,
+        dstAmount: ltrRate * amountNumber,
         dstCurrency: to,
 
         ltrRate,
