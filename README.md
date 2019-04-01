@@ -1,4 +1,6 @@
-# Currency converter
+# [Currency converter](https://currency-converter-demo.netlify.com/)
+
+![Demo photo](./doc/images/demo.png "Demo page")
 
 A simple currency converter built by React.js with the help of [exchangeratesapi](https://exchangeratesapi.io)
 
@@ -11,7 +13,9 @@ A simple currency converter built by React.js with the help of [exchangeratesapi
 
 - [React.js](https://reactjs.org/)
 - [Webpack](https://webpack.js.org/)
-- [Fetch](https://github.com/github/fetch)
+- [fetch](https://github.com/github/fetch)
+- [Material UI](https://material-ui.com/)
+- [react-select](https://react-select.com/home)
 
 ## Getting started
 
