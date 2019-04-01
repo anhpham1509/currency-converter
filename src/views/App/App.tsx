@@ -68,7 +68,7 @@ class App extends React.Component<IProps, IState> {
           <h1>Currency Converter</h1>
         </Grid>
 
-        {this.renderForm()}
+        <form onSubmit={this.convert}>{this.renderForm()}</form>
 
         {this.renderResult()}
       </Grid>
@@ -127,7 +127,7 @@ class App extends React.Component<IProps, IState> {
           </Grid>
 
           <Grid item={true} xs={6} md={3}>
-            <Button className="submit-btn" variant="contained" color="primary" onClick={this.convert}>
+            <Button className="submit-btn" variant="contained" color="primary" type="submit" onClick={this.convert}>
               Convert
               <SendIcon>convert</SendIcon>
             </Button>
@@ -183,7 +183,9 @@ class App extends React.Component<IProps, IState> {
     this.setState({amount: value});
   };
 
-  private convert = () => {
+  private convert = (event: React.FormEvent) => {
+    event.preventDefault();
+
     if (!this.isValid()) {
       return this.setState({showError: true});
     }
