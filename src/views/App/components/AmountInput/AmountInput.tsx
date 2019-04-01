@@ -10,7 +10,9 @@ interface IProps {
   showError: boolean;
 }
 
-interface IState {}
+interface IState {
+  focusing: boolean;
+}
 
 const numberInputProps = {
   type: "number",
@@ -18,6 +20,14 @@ const numberInputProps = {
 };
 
 export default class AmountInput extends React.Component<IProps, IState> {
+  public constructor(props: IProps) {
+    super(props);
+
+    this.state = {
+      focusing: false
+    };
+  }
+
   public render() {
     const {value} = this.props;
 
@@ -32,6 +42,8 @@ export default class AmountInput extends React.Component<IProps, IState> {
         helperText={this.shouldShowErrors() && "Please input the conversion amount"}
         onChange={this.onInputChange}
         inputProps={numberInputProps}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
       />
     );
   }
@@ -42,7 +54,16 @@ export default class AmountInput extends React.Component<IProps, IState> {
 
   private shouldShowErrors = () => {
     const {value, showError} = this.props;
+    const {focusing} = this.state;
 
-    return showError && (!value || Number.parseFloat(value) <= 0);
+    return showError && !focusing && (!value || Number.parseFloat(value) <= 0);
+  };
+
+  private onFocus = () => {
+    this.setState({focusing: true});
+  };
+
+  private onBlur = () => {
+    this.setState({focusing: false});
   };
 }
